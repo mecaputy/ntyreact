@@ -1,5 +1,6 @@
-import React from "react";
+import React, { Component } from "react";
 import "./SearchForm.css";
+import SearchBtn from "../SearchBtn";
 
 class SearchForm extends Component {
     state = {
@@ -11,13 +12,13 @@ class SearchForm extends Component {
     render() {
         return (
             <div>
-                <form className="search">
-                    <div clasName="card-header">Search Parameters</div>
+                <div className="card">
+                    <div className="card-header">Search Parameters</div>
                     <div className="form-group">
                         <label>Search Term:</label>
                         <input
-                            value={props.searchTerm}
-                            onChange={props.handleInputChange}
+                            value={this.searchTerm}
+                            onChange={this.handleInputChange}
                             type="text"
                             //   shoudl the type be "search"???
                             className="form-control"
@@ -28,8 +29,8 @@ class SearchForm extends Component {
                     <div className="form-group">
                         <label>Start Year (Optional):</label>
                         <input
-                            value={props.startYear}
-                            onChange={props.handleInputChange}
+                            value={this.startYear}
+                            onChange={this.handleInputChange}
                             type="text"
                             className="form-control"
                             id="start-year"
@@ -38,16 +39,25 @@ class SearchForm extends Component {
                     <div className="form-group">
                         <label>End Year (Optional):</label>
                         <input
-                            value={props.endYear}
-                            onChange={props.handleInputChange}
+                            value={this.endYear}
+                            onChange={this.handleInputChange}
                             type="text"
                             className="form-control"
                             id="end-year"
                         />
                     </div>
-                </form>
+                    <SearchBtn
+                        type="submit"
+                        onClick={this.handleFormSubmit}
+                        className="btn btn-success"
+                    />
+                    <br />
+
+                </div>
             </div>
         )
     }
 }
+
+export default SearchForm;
 

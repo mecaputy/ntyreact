@@ -8,6 +8,7 @@ const SearchResults = props => (
       </li>
     ))}
   </ul>
+  //add in card for results? buttons to save?
 );
 
 export default SearchResults;

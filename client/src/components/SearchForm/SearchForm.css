@@ -1,0 +1,15 @@
+.card-header {
+    color: white;
+    background-color: #233257;
+    padding: 5px;
+}
+.search-form {
+    border: 1px;
+    border-style: solid;
+    border-color: #233257;
+    margin-bottom: 8px;
+    border-top: none;
+}
+.form-group {
+    padding: 10px;
+}

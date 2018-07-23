@@ -1,16 +1,31 @@
-import React from "react";
+import React, { Component } from "react";
+import axios from "axios";
 import SearchForm from "../components/SearchForm/SearchForm";
+import Jumbotron from "../components/Jumbotron/Jumbotron";
+import APIKey from "../utils/API";
 // import other components for page
 
 class Home extends Component {
     state = {
-        searchTerm: ""
-    }
+        articles: []
+    };
 
     componentDidMount() {
-        API.getArticles()
-            .then(res => this.setstate({}))
+        this.getArticles();
     };
+
+    getArticles = () => {
+        axios.get("https://api.nytimes.com/svc/search/v2/articlesearch.json?" + APIKey).then((res) => {
+            this.setState({
+                article: res.data.results
+            });
+        });
+    };
+    saveArticle = (article) => {
+        axios.post("/saved", {
+
+        })
+    }
 
     handleInputChange = event => {
         this.setState({ search: event.target.value });
@@ -18,12 +33,13 @@ class Home extends Component {
 
     handleFormSubmit = event => {
         event.preventDefault();
-
+        //add code to handle submit
     };
 
     render() {
         return (
-            <div>
+            <div className="container">
+                <Jumbotron />
                 <SearchForm
                     handleFormSubmit={this.handleFormSubmit}
                     handleImputChange={this.handleInputChange}
@@ -42,3 +58,5 @@ class Home extends Component {
     }
 
 }
+
+export default Home;

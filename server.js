@@ -15,8 +15,4 @@ app.listen(PORT);
 const mongoose = require('mongoose');
 
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/mern",
-  {
-    useMongoClient: true
-  }
-);
+  process.env.MONGODB_URI || "mongodb://localhost/mern");
