@@ -1,14 +1,8 @@
-const axios = require("axios");
 const router = require("express").router();
+const articlesController = require("../controllers/articlesController");
 
-router.get("/articles", (req, res) => {
-    Article.creat(req.body)
-    .then(() => {
-        res.json(true);
-    })
-    .catch((err) => {
-        res.json(err);
-    });
-});
+router.route("/")
+    .get(articlesController.findAll)
+    .post(articlesController.create);
 
 module.exports = router;

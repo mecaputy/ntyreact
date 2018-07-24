@@ -1,12 +1,23 @@
 import React, { Component } from "react";
 import "./SearchForm.css";
+import API from "../../utils/API";
 import SearchBtn from "../SearchBtn";
 
 class SearchForm extends Component {
     state = {
+        results: [],
         searchTerm: "",
         startYear: "",
-        endYear: ""
+        endYear: "",
+        articles: []
+    }
+
+    loadArticles = () => {
+        API.getArticles()
+        .then(res =>
+        this.setState({ articles: res.data })
+       )
+       .catch(err => console.log(err));
     }
 
     render() {
