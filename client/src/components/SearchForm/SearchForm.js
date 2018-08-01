@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import "./SearchForm.css";
 import API from "../../utils/API";
-import SearchBtn from "../SearchBtn";
+// import SearchBtn from "../SearchBtn";
+import SearchResults from "../SearchResults";
 
 class SearchForm extends Component {
     state = {
@@ -18,6 +19,14 @@ class SearchForm extends Component {
         this.setState({ articles: res.data })
        )
        .catch(err => console.log(err));
+    }
+    handleFormSubmit = event => {
+        event.preventDefault();
+        API.apiArticles(this.state.searchTerm, this.state.startYear, this.state.endYear)
+        .then(res => {
+            this.setState({ results: res, searchTerm: "", startYear: "", endYear: ""});
+        })
+        .catch(err => console.log(err));
     }
 
     render() {
@@ -57,14 +66,20 @@ class SearchForm extends Component {
                             id="end-year"
                         />
                     </div>
-                    <SearchBtn
+                    <button
                         type="submit"
                         onClick={this.handleFormSubmit}
-                        className="btn btn-success"
-                    />
+                        className="btn btn-default btn-primary">Submit
+                    </button>
                     <br />
-
                 </div>
+                <br />
+                <div>
+                <SearchResults 
+                    results={this.state.results}
+                />
+                </div>
+
             </div>
         )
     }

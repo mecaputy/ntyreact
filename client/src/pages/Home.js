@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import SearchForm from "../components/SearchForm/SearchForm";
 import Jumbotron from "../components/Jumbotron/Jumbotron";
-import APIKey from "../utils/API";
+// import APIKey from "../utils/API";
 // import other components for page
 
 class Home extends Component {
@@ -15,11 +15,24 @@ class Home extends Component {
     };
 
     getArticles = () => {
-        axios.get("https://api.nytimes.com/svc/search/v2/articlesearch.json?" + APIKey).then((res) => {
-            this.setState({
-                article: res.data.results
-            });
-        });
+        // axios.get("https://api.nytimes.com/svc/search/v2/articlesearch.json?" + APIKey).then((res) => {
+        //     this.setState({
+        //         article: res.data.results
+        //     });
+        // });
+        axios.get({
+            url: "https://api.nytimes.com/svc/search/v2/articlesearch.json",
+            qs: {
+              'api-key': "db0f7161dc944fc099e9228621e46695",
+              'q': "china",
+              'begin_date': "20001212",
+              'end_date': "20161212"
+            },
+          }, function(err, response, body) {
+              if (err) throw err
+            body = JSON.parse(body);
+            console.log(body);
+          })
     };
     saveArticle = (article) => {
         axios.post("/saved", {
